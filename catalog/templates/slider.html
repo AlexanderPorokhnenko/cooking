@@ -1,0 +1,27 @@
+<!-- ##### Hero Area Start ##### -->
+    <section class="hero-area">
+
+
+        <div class="hero-slides owl-carousel">
+        {% for item in recept_titles %}
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide bg-img" style="background-image: url(/static/img/bg-img/bg1.jpg);">
+            <!-- Case for img from db <div class="single-hero-slide bg-img" style="background-image: url(/static/img/blog-img/{{item.photos}});">-->
+
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="hero-slides-content" data-animation="fadeInUp" data-delay="100ms">
+                                <h2 data-animation="fadeInUp" data-delay="300ms">{{item.title}}</h2>
+                                <p data-animation="fadeInUp" data-delay="700ms">{{item.text|slice:':100'}}...</p>
+                                <a href="#" class="btn delicious-btn" data-animation="fadeInUp" data-delay="1000ms">Читать далее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->

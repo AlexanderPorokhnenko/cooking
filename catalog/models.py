@@ -39,7 +39,7 @@ class Recept(models.Model):
     title = models.CharField(max_length=200, help_text='Enter the title of the article')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID of recept', editable=False, unique=True)
     text = models.TextField(help_text='Enter text of article')
-    photos = models.ImageField(help_text='Attach images', null=True)
+    photos = models.ImageField(help_text='Attach images', null=True, upload_to='static/img/blog-img')
     kitchen = models.ManyToManyField(Kitchen, help_text='Select a kitchen for this recept')
     kind = models.ForeignKey('Kind', on_delete=models.SET_NULL, null=True)
 
