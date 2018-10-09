@@ -3,6 +3,7 @@ from django.urls import reverse
 import uuid
 
 class Kitchen(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
     kitchen_vars = (
         ('japan','Японская'),
         ('china','Китайская'),
@@ -21,6 +22,7 @@ class Kitchen(models.Model):
         return self.kitchen
 
 class Kind(models.Model):
+    id = models.AutoField(unique=True, primary_key=True)
     kind_vars = (
         ('first', 'Первое блюдо'),
         ('second', 'Второе блюдо'),
@@ -41,6 +43,7 @@ class Recept(models.Model):
     text = models.TextField(help_text='Enter text of article')
     photos = models.ImageField(help_text='Attach images', null=True, upload_to='static/img/blog-img')
     kitchen = models.ManyToManyField(Kitchen, help_text='Select a kitchen for this recept')
+    ingridients = models.TextField(help_text='List and quantity of ingridients', default='')
     kind = models.ForeignKey('Kind', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -50,7 +53,7 @@ class Recept(models.Model):
         """
         Returns the url to access a particular instance of MyModelName.
         """
-        return reverse('recept_detail', args=[str(self.id)])
+        return reverse('receipt-detail', args=[str(self.id)])
 
 
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends "base_generic.html" %}
+    <meta charset="UTF-8">
+    {% block content %}
+    <title>Title</title>
+</head>
+<body>
+{% if recept_list %}
+<ul>
+
+      {% for recept in recept_list %}
+      <li>
+        <a href="{{ recept.get_absolute_url }}">{{ recept.title }}</a> ({{recept.text}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no books in the library.</p>
+{% endif %}
+aaaaaaaaaaaaaaaaaa
+</body>
+{% endblock %}
+</html>

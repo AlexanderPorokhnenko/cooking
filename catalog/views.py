@@ -1,30 +1,36 @@
 from django.shortcuts import render
 from .models import Kitchen, Kind, Recept
-from django.db.models.functions import Substr
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
 
 class viewIndex(TemplateView):
     template_name = 'index.html'
 
     def get(self, request):
         last3receptsTitles = Recept.objects.all().values()[:3]
-        for item in last3receptsTitles:
-            print(item['title'])
-
         ctx = {
             'recept_titles': last3receptsTitles
         }
 
         return render(request, self.template_name, ctx)
-# def index(request):
-#     num_recept = Recept.objects.all().count(),
-#     recept_title = Recept.objects.all()
-#     last3recepts = Recept.objects.all().values()
-#     print(not last3recepts.values('text').annotate(firsrsymb= Substr('text',1,50)))
-#     return render(request,'index.html', context={'num_recepts':num_recept, 'recept_titles':last3recepts})
+
+class ReceiptsListView(ListView):
+    model = Recept
+
+    def get_queryset(self):
+        return Recept.objects.all()[:3]
+
+    def get_context_data(self, **kwargs):
+        context = super(ReceiptsListView, self).get_context_data(**kwargs)
+        return context
+
+class ReceiptDetailView(DetailView):
+    model = Recept
+
 class viewReceptSearch(TemplateView):
+
     template_name = 'receipe-post.html'
     def get(self, request, *args, **kwargs):
+        ctx = {Recept.objects.all()}
         return render(request, self.template_name)
 
 def contact(request):
