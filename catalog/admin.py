@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Recept, Kitchen, Kind, Subscriptions
+from .models import Recept, Article
 
 admin.site.register(Recept)
-admin.site.register(Kind)
-admin.site.register(Kitchen)
-admin.site.register(Subscriptions)
+admin.site.register(Article)

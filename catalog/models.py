@@ -59,13 +59,24 @@ class Recept(models.Model):
         return str(self.ingridients).split(';')
 
     def get_absolute_url(self):
-        """
-        Returns the url to access a particular instance of MyModelName.
-        """
         return reverse('receipt-detail', args=[str(self.id)])
 
 class Subscriptions(models.Model):
     email = models.EmailField(max_length=55)
+
+
+class Article(models.Model):
+    title = models.CharField(max_length=200)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    pictures = models.ImageField(null=False, upload_to='static/img/articles')
+    text = models.TextField(help_text='Enter text of article')
+    current_date = models.DateField(default=datetime.date.today)
+
+    def __str__(self):
+        return str(self.title)
+
+    def get_absolute_url(self):
+        return reverse('article-detail', args=[str(self.id)])
 
 
 

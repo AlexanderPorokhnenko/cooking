@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Recept, Subscriptions
+from .models import Recept, Subscriptions, Article
 from .forms import SubscribeForm
 from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView
@@ -86,14 +86,20 @@ class Search(ListView):
 
 
 class Articles(ListView):
-    template_name = 'article.html'
+    model = Article
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+class ArticlesDetail(DetailView):
+    model = Article
 
-def contact(request):
-    return render(request, 'contact.html')
+    def get_context_data(self, **kwargs):
+        context = super(ArticlesDetail, self).get_context_data(**kwargs)
+        return context
 
+    def get_context_data(self, **kwargs):
+        context = super(ArticlesDetail, self).get_context_data(**kwargs)
+        return context
 
-def about(request):
-    return render(request, 'about.html')
+class AboutView(TemplateView):
+    template_name = 'about.html'
+# def about(request):
+#     return render(request, 'about.html')
