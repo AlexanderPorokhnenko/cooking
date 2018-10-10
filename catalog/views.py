@@ -86,7 +86,10 @@ class Search(ListView):
 
 
 class Articles(ListView):
-    pass
+    template_name = 'article.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
 
 def contact(request):
     return render(request, 'contact.html')
