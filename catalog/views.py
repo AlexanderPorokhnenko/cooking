@@ -17,7 +17,7 @@ class ReceiptsListView(ListView):
     model = Recept
 
     def get_queryset(self):
-        return Recept.objects.all()[:3]
+        return Recept.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(ReceiptsListView, self).get_context_data(**kwargs)
@@ -25,6 +25,15 @@ class ReceiptsListView(ListView):
 
 class ReceiptDetailView(DetailView):
     model = Recept
+
+    def get_context_data(self, **kwargs):
+        context = super(ReceiptDetailView, self).get_context_data(**kwargs)
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super(ReceiptDetailView, self).get_context_data(**kwargs)
+        return context
+
 
 class viewReceptSearch(TemplateView):
 

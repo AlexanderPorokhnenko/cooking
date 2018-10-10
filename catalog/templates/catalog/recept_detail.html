@@ -2,12 +2,129 @@
 <html lang="en">
 <head>
     {% extends "base_generic.html" %}
+     {% load static %}
     <meta charset="UTF-8">
     {% block content %}
-    <title>Title</title>
+
 </head>
 <body>
-aaaaaaaaaaaaaaaaaa
+ <!-- Receipe Slider -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="receipe-slider owl-carousel">
+                        <img src="{% static 'img/bg-img/bg5.jpg' %}" alt="">
+                        <img src="{% static 'img/bg-img/bg5.jpg' %}" alt="">
+                        <img src="{% static 'img/bg-img/bg5.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Receipe Content Area -->
+        <div class="receipe-content-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="receipe-headline my-5">
+                            <span>{{recept.current_date|date:"d E Y"}}</span>
+                            <h2>{{recept.title}}</h2>
+                            <div class="receipe-duration">
+                                <h6>Prep: 15 mins</h6>
+                                <h6>Cook: 30 mins</h6>
+                                <h6>Yields: 8 Servings</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="receipe-ratings text-right my-5">
+                            <div class="ratings">
+                                {% for i in '12345' %}
+                                    {% if forloop.counter <= recept.stars %}
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    {% else %}
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    {% endif%}
+                                {% endfor %}
+                            </div>
+
+                            <a href="#" class="btn delicious-btn">{% if recept.stars <= 3 %} Для начинающих{% else %}Непростой рецепт{% endif %}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <!-- Single Preparation Step -->
+                        {% for step in recept.slpit_text %}
+                            <div class="single-preparation-step d-flex">
+                                {% if forloop.counter < 10 and step%}
+                                    <h4>0{{forloop.counter}}.</h4>
+                                {% elif step %}
+                                    <h4>{{forloop.counter}}.</h4>
+                                {% endif %}
+                                <p>{{step}}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Ingredients -->
+                    <div class="col-12 col-lg-4">
+                        <div class="ingredients">
+                            <h4>Ингридиенты</h4>
+
+                            <!-- Custom Checkbox -->
+                            {% for step in recept.slpit_ingridients %}
+                            {% if step %}
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck{{forloop.counter}}">
+                                <label class="custom-control-label" for="customCheck{{forloop.counter}}">{{step}}</label>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading text-left">
+                            <h3>Оставьте комментарий</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="contact-form-area">
+                            <form action="#" method="post">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <input type="text" class="form-control" id="name" placeholder="Имя">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <input type="email" class="form-control" id="email" placeholder="E-mail">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="subject" placeholder="Тема">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Сообщение"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn delicious-btn mt-30" type="submit">Отправить</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+ {% include '_footer.html' %}
 {% endblock %}
 </html>

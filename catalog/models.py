@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-import uuid
+import uuid, datetime
 
 class Kitchen(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
@@ -45,9 +45,18 @@ class Recept(models.Model):
     kitchen = models.ManyToManyField(Kitchen, help_text='Select a kitchen for this recept')
     ingridients = models.TextField(help_text='List and quantity of ingridients', default='')
     kind = models.ForeignKey('Kind', on_delete=models.SET_NULL, null=True)
+    current_date = models.DateField(default=datetime.date.today)
+    stars_choice = ((1,1), (2,2), (3,3), (4,4), (5,5))
+    stars = models.IntegerField(choices=stars_choice, default=3)
 
     def __str__(self):
         return self.title
+
+    def slpit_text(self):
+        return str(self.text).split(';')
+
+    def slpit_ingridients(self):
+        return str(self.ingridients).split(';')
 
     def get_absolute_url(self):
         """
