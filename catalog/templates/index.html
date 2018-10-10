@@ -20,13 +20,18 @@
 </head>
 
 <body>
-
+    {% if messages %}
+    {% for message in messages %}
+        <div class="section-heading">
+                        <h3>{{message}}</h3>
+                    </div>
+    {% endfor %}
+    {% endif %}
     <!-- Preloader -->
     <div id="preloader">
         <i class="circle-preloader"></i>
         <img src="{% static 'img/core-img/salad.png' %}" alt="">
     </div>
-
 
     <div class="slider">
         {% include "slider.html" %}
@@ -112,7 +117,8 @@
                         <h4>Subscribe to our newsletter</h4>
                         <!-- Form -->
                         <div class="newsletter-form bg-img bg-overlay" style="background-image: url(static/img/bg-img/bg1.jpg);">
-                            <form action="#" method="post">
+                            <form action="subscribe/" method="post">
+                                {% csrf_token %}
                                 <input type="email" name="email" placeholder="Subscribe to newsletter">
                                 <button type="submit" class="btn delicious-btn w-100">Subscribe</button>
                             </form>
