@@ -65,6 +65,16 @@ class Subscriptions(models.Model):
     email = models.EmailField(max_length=55)
 
 
+class Message(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=55)
+    subject = models.CharField(max_length=50)
+    message = models.TextField(max_length=1000)
+    current_date = models.DateField(default=datetime.date.today)
+
+    def __str__(self):
+        return str(self.subject) +" " + str(self.email) + " " + str(self.current_date)
+
 class Article(models.Model):
     title = models.CharField(max_length=200)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)

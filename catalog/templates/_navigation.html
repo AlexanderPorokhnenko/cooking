@@ -1,8 +1,29 @@
    <!-- ##### Header Area Start ##### -->
+   <body>
    {% load static %}
-    <header class="header-area">
+       <!-- Preloader -->
+    <!--<div id="preloader">-->
+        <!--<i class="circle-preloader"></i>-->
+        <!--<img src="{% static 'img/core-img/salad.png' %}" alt="">-->
+    <!--</div>-->
+           <!-- Search Wrapper -->
+    <div class="search-wrapper">
+        <!-- Close Btn -->
+        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
 
-        <!-- Top Header Area -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="receiptSearch/" method="get">
+                        <input type="search" name="search" placeholder="Type any keywords...">
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Top Header Area -->
+    <header class="header-area">
         <div class="top-header-area">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-between">
@@ -143,22 +164,5 @@
             </div>
         </div>
     </header>
-   <body>
-       <!-- Search Wrapper -->
-    <div class="search-wrapper">
-        <!-- Close Btn -->
-        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <form action="receiptSearch/" method="get">
-                        <input type="search" name="search" placeholder="Type any keywords...">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- ##### Header Area End ##### -->
-   </body>

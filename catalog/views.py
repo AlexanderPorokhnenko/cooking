@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Recept, Subscriptions, Article
-from .forms import SubscribeForm
+from .forms import SubscribeForm, SendMessageFrom
 from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView
 from django.shortcuts import get_object_or_404
@@ -101,5 +101,12 @@ class ArticlesDetail(DetailView):
 
 class AboutView(TemplateView):
     template_name = 'about.html'
-# def about(request):
-#     return render(request, 'about.html')
+
+    def post(self, request, *args, **kwargs):
+        form = SendMessageFrom(request.POST)
+        if form.is_valid():
+            form.cleaned_data
+            form.save()
+            messages.success(request, 'Спасибо за отзыв! Это очень важно для нас!')
+        else:messages.error(request, 'Не удалось отправить сообщение...попробуйте позже :(')
+        return render(request, self.template_name)
