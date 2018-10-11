@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% extends "base_generic.html" %}
     {% load static %}
     <meta charset="UTF-8">
-    {% block content %}
-    <title>Title</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+    <!-- Title -->
+    <title>Delicious - Food Blog Template | Home</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+{% include '_navigation.html' %}
 <!-- ##### Breadcumb Area Start ##### -->
     <div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
         <div class="container h-100">
@@ -58,8 +68,8 @@
                 </form>
             </div>
         </div>
-     <div class="receipe-headline my-5"">
-     {% if 'receiptSearch' in request.path and recept_list %}
+<div class="section-heading">
+    {% if 'receiptSearch' in request.path and recept_list %}
      <h2>Вот, что удалось найти:</h2>
      {% elif not recept_list%}
      <h2>К сожалению, ничего не найдено...</h2>
@@ -70,6 +80,5 @@
 {% include '_small_recept_area.html' %}
 </body>
 {% include '_footer.html' %}
-{% endblock %}
 
 </html>
