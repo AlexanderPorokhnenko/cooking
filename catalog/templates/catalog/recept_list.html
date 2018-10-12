@@ -33,7 +33,9 @@
     </div>
     <!-- ##### Breadcumb Area End ##### -->
  <div class="receipe-post-area section-padding-80">
-
+        {% for message in messages %}
+            {{ message }}
+     {% endfor%}
         <!-- Receipe Post Search -->
         <div class="receipe-post-search mb-80">
             <div class="container">
@@ -42,11 +44,9 @@
                     <div class="row">
                         <div class="col-12 col-lg-3">
                             <select name="select1" id="select1">
-                                <option value="1">All Receipies Categories</option>
-                                <option value="1">All Receipies Categories 2</option>
-                                <option value="1">All Receipies Categories 3</option>
-                                <option value="1">All Receipies Categories 4</option>
-                                <option value="1">All Receipies Categories 5</option>
+                                {%for item in kind_query_set %}
+                                <option value="{{item}}">{{item.get_kind_display}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col-12 col-lg-3">

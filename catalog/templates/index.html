@@ -33,33 +33,42 @@
 
 {% include 'slider.html' %}
     <!-- ##### Top Catagory Area Start ##### -->
+
     <section class="top-catagory-area section-padding-80-0">
         <div class="container">
+            <div class="section-heading">
+                <h3>Новые статьи</h3>
+            </div>
             <div class="row">
                 <!-- Top Catagory Area -->
+                {% for item in last3_articles %}
+
                 <div class="col-12 col-lg-6">
                     <div class="single-top-catagory">
                         <img src="{% static 'img/bg-img/bg2.jpg' %}" alt="">
+                        <!--<img src="{% static '{{item.pictures}}' %}" alt="">-->
+
                         <!-- Content -->
                         <div class="top-cta-content">
-                            <h3>Strawberry Cake</h3>
-                            <h6>Simple &amp; Delicios</h6>
-                            <a href="receipe-post.html" class="btn delicious-btn">See Full Receipe</a>
+                            <h3>{{item.title}}</h3>
+                            <h6>Вкусно и просто!</h6>
+                            <a href="receipe-post.html" class="btn delicious-btn">Читать полностью</a>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
                 <!-- Top Catagory Area -->
-                <div class="col-12 col-lg-6">
-                    <div class="single-top-catagory">
-                        <img src="{% static 'img/bg-img/bg3.jpg' %}" alt="">
-                        <!-- Content -->
-                        <div class="top-cta-content">
-                            <h3>Chinesse Noodles</h3>
-                            <h6>Simple &amp; Delicios</h6>
-                            <a href="receipe-post.html" class="btn delicious-btn">See Full Receipe</a>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="col-12 col-lg-6">-->
+                    <!--<div class="single-top-catagory">-->
+                        <!--<img src="{% static 'img/bg-img/bg3.jpg' %}" alt="">-->
+                        <!--&lt;!&ndash; Content &ndash;&gt;-->
+                        <!--<div class="top-cta-content">-->
+                            <!--<h3>Chinesse Noodles</h3>-->
+                            <!--<h6>Simple &amp; Delicios</h6>-->
+                            <!--<a href="receipe-post.html" class="btn delicious-btn">See Full Receipe</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
     </section>
@@ -71,7 +80,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading">
-                        <h3>The best Receipies</h3>
+                        <h3>Лучшие рецепты</h3>
                     </div>
                 </div>
             </div>
@@ -466,13 +475,13 @@
                 <!-- Newsletter -->
                 <div class="col-12 col-lg-4">
                     <div class="newsletter-area">
-                        <h4>Subscribe to our newsletter</h4>
+                        <h4>Подписаться на рассылку</h4>
                         <!-- Form -->
                         <div class="newsletter-form bg-img bg-overlay" style="background-image: url(/static/img/bg-img/bg1.jpg);">
                             <form action="subscribe/" method="post">
                                 {% csrf_token%}
-                                <input type="email" name="email" placeholder="Subscribe to newsletter">
-                                <button type="submit" class="btn delicious-btn w-100">Subscribe</button>
+                                <input type="email" name="email" placeholder="Почтовый ящик">
+                                <button type="submit" class="btn delicious-btn w-100">Подписаться</button>
                             </form>
                             <p>Fusce nec ante vitae lacus aliquet vulputate. Donec sceleri sque accumsan molestie. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</p>
                         </div>

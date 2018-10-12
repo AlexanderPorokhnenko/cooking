@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Recept, Subscriptions, Article
+from .models import Recept, Subscriptions, Article, Kind
 from .forms import SubscribeForm, SendMessageFrom
 from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView
@@ -11,9 +11,11 @@ class viewIndex(TemplateView):
     template_name = 'index.html'
 
     def get(self, request):
-        last3receptsTitles = Recept.objects.all().values()[:3]
+        last3recepts = Recept.objects.all()[:3]
+        last3Articles = Article.objects.all()[:2],
         ctx = {
-            'recept_titles': last3receptsTitles
+            'last3_recept': last3recepts,
+            'last3_articles': last3Articles
         }
 
         return render(request, self.template_name, ctx)
@@ -26,6 +28,7 @@ class ReceiptsListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ReceiptsListView, self).get_context_data(**kwargs)
+        context['kind_query_set'] = Kind.objects.all()
         return context
 
 class ReceiptDetailView(DetailView):
@@ -76,13 +79,21 @@ class Search(ListView):
 
     def post(self, request, *args, **kwargs):
         query = request.POST.get('search')
+        print(request.POST)
         if query:
             search_query_set = Recept.objects.filter(title__icontains=query)
             if search_query_set:
-                ctx = {'recept_list': search_query_set}
+                ctx = {'recept_list': search_query_set,
+                       'kind_query_set': Kind.objects.all()
+                       }
                 return render(request, self.template_name, context=ctx)
             else:
-                return render(request, self.template_name)
+                ctx = {'kind_query_set': Kind.objects.all()}
+                return render(request, self.template_name, context=ctx)
+        else:
+            ctx = {'kind_query_set': Kind.objects.all()}
+            # messages.error(request, 'ERRRRORRRRR')
+            return render(request, self.template_name, context=ctx)
 
 
 class Articles(ListView):

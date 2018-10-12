@@ -24,15 +24,15 @@ class Kitchen(models.Model):
 class Kind(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     kind_vars = (
-        ('first', 'Первое блюдо'),
-        ('second', 'Второе блюдо'),
+        ('first', 'Первые блюда'),
+        ('second', 'Вторые блюда'),
         ('snack', 'Закуски'),
-        ('dessert', 'Десерт'),
-        ('salat', 'Салат'),
-        ('drink', 'Напиток')
+        ('dessert', 'Десерты'),
+        ('salat', 'Салаты'),
+        ('drink', 'Напитки')
     )
 
-    kind = models.CharField(max_length=100, choices=kind_vars)
+    kind = models.CharField(max_length=100, choices=kind_vars, unique=True)
 
     def __str__(self):
         return self.kind
@@ -87,6 +87,8 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return reverse('article-detail', args=[str(self.id)])
+
+
 
 
 
