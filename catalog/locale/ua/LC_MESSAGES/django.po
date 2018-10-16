@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-16 11:46+0300\n"
+"POT-Creation-Date: 2018-10-16 15:18+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,40 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: catalog/templates/_navigation.html:14
+msgid "Приветствуем Вас"
+msgstr "Раді вітаті Вас"
+
+#: catalog/templates/_navigation.html:15
+msgid "На лучшем кулинарном сайте"
+msgstr "На кращому кулінарному сайті"
+
+#: catalog/templates/_navigation.html:16
+msgid "Приготовьтесь, будет вкусно!"
+msgstr "Готуйтесь, буде смачно!"
+
+#: catalog/templates/_navigation.html:63
+msgid "Главная"
+msgstr "Головна"
+
+#: catalog/templates/_navigation.html:129
+msgid "Рецепты"
+msgstr "Рецепти"
+
+#: catalog/templates/_navigation.html:130
+#, fuzzy
+#| msgid "Новые статьи"
+msgid "Статьи"
+msgstr "Статтi"
+
+#: catalog/templates/_navigation.html:131
+msgid "О нас"
+msgstr "Про нас"
+
+#: catalog/templates/_navigation.html:155
+msgid "Что будем искать?"
+msgstr "Що шукати?"
 
 #: catalog/templates/index.html:41
 msgid "Новые статьи"

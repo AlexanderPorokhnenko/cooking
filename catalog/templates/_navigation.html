@@ -11,9 +11,9 @@
                         <div class="breaking-news">
                             <div id="breakingNewsTicker" class="ticker">
                                 <ul>
-                                    <li><a href="#">Hello World!</a></li>
-                                    <li><a href="#">Welcome to Colorlib Family.</a></li>
-                                    <li><a href="#">Hello Delicious!</a></li>
+                                    <li><a href="#">{% trans 'Приветствуем Вас' %}</a></li>
+                                    <li><a href="#">{% trans 'На лучшем кулинарном сайте' %}</a></li>
+                                    <li><a href="#">{% trans 'Приготовьтесь, будет вкусно!' %}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -22,12 +22,14 @@
                     <!-- Top Social Info -->
                     <div class="col-12 col-sm-6">
                         <div class="top-social-info text-right">
+                            <a href="feed/"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-odnoklassniki" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-telegram" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +62,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="active"><a href="/">Главная</a></li>
+                                    <li class="active"><a href="/">{% trans 'Главная' %}</a></li>
                                     <!--<li><a href="#">Pages</a>-->
                                         <!--<ul class="dropdown">-->
                                             <!--<li><a href="/index/">Главная</a></li>-->
@@ -89,17 +91,8 @@
                                             <!--</li>-->
                                         <!--</ul>-->
                                     <!--</li>-->
-                                    <li><a href="#">Mega Menu</a>
-                                        <div class="megamenu">
-                                            <ul class="single-mega cn-col-4">
-                                                <li class="title">Catagory</li>
-                                                <li><a href="/index/">Главная</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="blog-post.html">Blog Post</a></li>
-                                                <li><a href="receipe-post.html">Поиск рецептов</a></li>
-                                                <li><a href="/about">О нас</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                            </ul>
+                                    <!--<li><a href="#">Mega Menu</a>-->
+                                        <!--<div class="megamenu">-->
                                             <!--<ul class="single-mega cn-col-4">-->
                                                 <!--<li class="title">Catagory</li>-->
                                                 <!--<li><a href="/index/">Главная</a></li>-->
@@ -109,26 +102,35 @@
                                                 <!--<li><a href="/about">О нас</a></li>-->
                                                 <!--<li><a href="elements.html">Elements</a></li>-->
                                             <!--</ul>-->
-                                            <!--<ul class="single-mega cn-col-4">-->
-                                                <!--<li class="title">Catagory</li>-->
-                                                <!--<li><a href="/index/">Главная</a></li>-->
-                                                <!--<li><a href="about.html">About Us</a></li>-->
-                                                <!--<li><a href="blog-post.html">Blog Post</a></li>-->
-                                                <!--<li><a href="receipe-post.html">Поиск рецептов</a></li>-->
-                                                <!--<li><a href="/about">О нас</a></li>-->
-                                                <!--<li><a href="elements.html">Elements</a></li>-->
-                                            <!--</ul>-->
-                                            <div class="single-mega cn-col-4">
-                                                <div class="receipe-slider owl-carousel">
-                                                    <a href="#"><img src="{% static 'img/bg-img/bg1.jpg' %}" alt=""></a>
-                                                    <a href="#"><img src="{% static 'img/bg-img/bg6.jpg' %}" alt=""></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li><a href="/receipts/">Рецепты</a></li>
-                                    <li><a href="/articles/">Статьи</a></li>
-                                    <li><a href="/about/">О нас</a></li>
+                                            <!--&lt;!&ndash;<ul class="single-mega cn-col-4">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li class="title">Catagory</li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="/index/">Главная</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="about.html">About Us</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="blog-post.html">Blog Post</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="receipe-post.html">Поиск рецептов</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="/about">О нас</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="elements.html">Elements</a></li>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<ul class="single-mega cn-col-4">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li class="title">Catagory</li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="/index/">Главная</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="about.html">About Us</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="blog-post.html">Blog Post</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="receipe-post.html">Поиск рецептов</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="/about">О нас</a></li>&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<li><a href="elements.html">Elements</a></li>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                                            <!--<div class="single-mega cn-col-4">-->
+                                                <!--<div class="receipe-slider owl-carousel">-->
+                                                    <!--<a href="#"><img src="{% static 'img/bg-img/bg1.jpg' %}" alt=""></a>-->
+                                                    <!--<a href="#"><img src="{% static 'img/bg-img/bg6.jpg' %}" alt=""></a>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</li>-->
+                                    <li><a href="/receipts/">{% trans "Рецепты" %}</a></li>
+                                    <li><a href="/articles/">{% trans "Статьи" %}</a></li>
+                                    <li><a href="/about/">{% trans "О нас" %}</a></li>
                                 </ul>
 
                                 <!-- Newsletter Form -->
@@ -152,7 +154,7 @@
             <div class="row">
                 <div class="col-12">
                     <form action="receiptSearch/" method="get">
-                        <input type="search" name="search" placeholder="Type any keywords...">
+                        <input type="search" name="search" placeholder="{% trans 'Что будем искать?' %}">
                         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
                 </div>

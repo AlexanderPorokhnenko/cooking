@@ -6,6 +6,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.contrib.syndication.views import Feed
 
 class viewIndex(TemplateView):
     template_name = 'index.html'
@@ -145,3 +146,17 @@ class AboutView(TemplateView):
             messages.success(request, 'Спасибо за отзыв! Это очень важно для нас!')
         else:messages.error(request, 'Не удалось отправить сообщение...попробуйте позже :(')
         return render(request, self.template_name)
+
+class ReceptArticleFeed(Feed):
+    title = "Perfect cooking - Отборные рецепты для вас"
+    description = "Последние статьи и рецепты с сайта Perfect Cooking"
+    link = 'feed/'
+
+    def items(self):
+        return Recept.objects.all()
+
+    def item_description(self, item):
+        return item.text[:400]
+
+    def item_title(self, item):
+        return item.title

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path
 from . import views
-from .views import viewIndex, viewReceptSearch, ReceiptsListView, Search, Articles, ArticlesDetail, AboutView
+from .views import viewIndex, viewReceptSearch, ReceiptsListView, Search, Articles, ReceptArticleFeed, AboutView
 
 urlpatterns = [
     path('', viewIndex.as_view() , name='index'),
@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'subscribe/', views.subscribe, name='subscribe_form'),
     url(r'receiptSearch/', Search.as_view(), name='search_form'),
     url(r'articles/', Articles.as_view(), name='articles'),
+    url(r'^feed/$', views.ReceptArticleFeed()),
 ]
