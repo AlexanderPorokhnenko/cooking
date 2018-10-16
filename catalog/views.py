@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Recept, Subscriptions, Article, Kind
+from .models import Recept, Subscriptions, Article, Kind, Kitchen
 from .forms import SubscribeForm, SendMessageFrom
 from django.contrib import messages
 from django.views.generic import TemplateView, ListView, DetailView
@@ -29,6 +29,7 @@ class ReceiptsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ReceiptsListView, self).get_context_data(**kwargs)
         context['kind_query_set'] = Kind.objects.all()
+        context['kitchen_query_set'] = Kitchen.objects.all().order_by('kitchen')
         return context
 
 class ReceiptDetailView(DetailView):
@@ -84,16 +85,39 @@ class Search(ListView):
             search_query_set = Recept.objects.filter(title__icontains=query)
             if search_query_set:
                 ctx = {'recept_list': search_query_set,
-                       'kind_query_set': Kind.objects.all()
+                       'kind_query_set': Kind.objects.all(),
+                       'kitchen_query_set': Kitchen.objects.all()
                        }
                 return render(request, self.template_name, context=ctx)
             else:
-                ctx = {'kind_query_set': Kind.objects.all()}
+                ctx = {'kind_query_set': Kind.objects.all(),
+                       'kitchen_query_set': Kitchen.objects.all()
+                       }
                 return render(request, self.template_name, context=ctx)
-        else:
-            ctx = {'kind_query_set': Kind.objects.all()}
-            # messages.error(request, 'ERRRRORRRRR')
+        elif request.POST.getlist('select1'):
+            formList = request.POST.getlist('select1')
+            if formList[0] and formList[1]:
+                search_query_set = Recept.objects.filter(kind__kind__icontains=formList[0], kitchen__kitchen__icontains=formList[1])
+                if search_query_set:
+                    ctx = {'recept_list': search_query_set,
+                           'kind_query_set': Kind.objects.all(),
+                           'kitchen_query_set': Kitchen.objects.all()
+                           }
+                    return render(request, self.template_name, context=ctx)
+            if formList[0] or formList[1]:
+                search_query_set = Recept.objects.filter(kind__kind__icontains=formList[0]) if formList[0] else Recept.objects.filter(kitchen__kitchen__icontains=formList[1])
+                if search_query_set:
+                    ctx = {'recept_list': search_query_set,
+                           'kind_query_set': Kind.objects.all(),
+                           'kitchen_query_set': Kitchen.objects.all()
+                           }
+                    return render(request, self.template_name, context=ctx)
+            ctx = {'kind_query_set': Kind.objects.all(),
+                   'kitchen_query_set': Kitchen.objects.all(),
+                   }
             return render(request, self.template_name, context=ctx)
+        else:
+            return render(request, self.template_name)
 
 
 class Articles(ListView):

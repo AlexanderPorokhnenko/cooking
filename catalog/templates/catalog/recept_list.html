@@ -36,6 +36,7 @@
         {% for message in messages %}
             {{ message }}
      {% endfor%}
+         <h5>Выберите тип блюда</h5>
         <!-- Receipe Post Search -->
         <div class="receipe-post-search mb-80">
             <div class="container">
@@ -44,25 +45,26 @@
                     <div class="row">
                         <div class="col-12 col-lg-3">
                             <select name="select1" id="select1">
+                                <option value="">Любой тип</option>
                                 {%for item in kind_query_set %}
                                 <option value="{{item}}">{{item.get_kind_display}}</option>
                                 {% endfor %}
                             </select>
                         </div>
+
                         <div class="col-12 col-lg-3">
                             <select name="select1" id="select2">
-                                <option value="1">All Receipies Categories</option>
-                                <option value="1">All Receipies Categories 2</option>
-                                <option value="1">All Receipies Categories 3</option>
-                                <option value="1">All Receipies Categories 4</option>
-                                <option value="1">All Receipies Categories 5</option>
+                                <option value="">Любая кухня</option>
+                                {%for item in kitchen_query_set %}
+                                <option value="{{item}}" > {{item.get_kitchen_display}}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="col-12 col-lg-3">
-                            <input type="search" name="search" placeholder="Search Receipies">
+                            <input type="search" name="search" placeholder="Поиск рецептов">
                         </div>
                         <div class="col-12 col-lg-3 text-right">
-                            <button type="submit" class="btn delicious-btn">Search</button>
+                            <button type="submit" class="btn delicious-btn">Поиск</button>
                         </div>
                     </div>
                 </form>
