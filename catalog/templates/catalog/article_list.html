@@ -3,12 +3,13 @@
 
   <head>
       {% load static %}
+      {% load i18n %}
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>{% trans 'Blog Home - Start Bootstrap Template' %}</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="icon" href="{% static 'img/favicon.ico' %}">
@@ -36,7 +37,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading">
-                        <h3>В этом разделе мы постарались собрать самые <br>интересные статьи о кулинарии и не только </h3>
+                        <h3>{% trans 'В этом разделе мы постарались собрать самые <br>интересные статьи о кулинарии и не только' %} </h3>
                     </div>
                 </div>
             </div>
@@ -51,14 +52,14 @@
           <!-- Blog Post -->
           {% for item in article_list %}
           <div class="card mb-4">
-            <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+            <img class="card-img-top" src="http://placehold.it/900x300" alt="Card image cap">
             <div class="card-body">
               <h2 class="card-title">{{item.title}}</h2>
               <p class="card-text">{{item.text|truncatechars:50}}</p>
-              <a href="{{item.get_absolute_url}}" class="btn btn-primary">Читать далее</a>
+              <a href="{{item.get_absolute_url}}" class="btn btn-primary">{% trans 'Читать далее' %}</a>
             </div>
             <div class="card-footer text-muted">
-              Опубликовано {{item.current_date}}
+              {% trans 'Опубликовано' %} {{item.current_date}}
             </div>
           </div>
 {% endfor %}
@@ -67,10 +68,10 @@
           <!-- Pagination -->
           <ul class="pagination justify-content-center mb-4">
             <li class="page-item">
-              <a class="page-link" href="#">&larr; Older</a>
+              <a class="page-link" href="#">&larr; {% trans 'Назад' %}</a>
             </li>
             <li class="page-item disabled">
-              <a class="page-link" href="#">Newer &rarr;</a>
+              <a class="page-link" href="#">{% trans 'Вперед' %} &rarr;</a>
             </li>
           </ul>
 

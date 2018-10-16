@@ -37,17 +37,37 @@ class Kind(models.Model):
     def __str__(self):
         return self.kind
 
+
+
+def upload_path_handler(instance, filename):
+    return "/home/alex/Projects/cooking/cooking_site/static/img/blog-img/{title}/{file}".format(title=instance.title, file=filename)
+
+class ImageList(models.Model):
+    title = models.CharField(max_length=200, help_text='Enter the title of the article', null=True)
+    title_image1 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
+    title_image2 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
+    title_image3 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
+    preview_image = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Preview image 110x110')
+    slider_image = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Slider image 1920x1280')
+
+    def __iter__(self):
+        return iter([self.image1, self.image2])
+
+    def __str__(self):
+        return str(self.title)
+
+
 class Recept(models.Model):
     title = models.CharField(max_length=200, help_text='Enter the title of the article')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID of recept', editable=False, unique=True)
     text = models.TextField(help_text='Enter text of article')
-    photos = models.ImageField(help_text='Attach images', null=True, upload_to='static/img/blog-img')
     kitchen = models.ManyToManyField(Kitchen, help_text='Select a kitchen for this recept')
     ingridients = models.TextField(help_text='List and quantity of ingridients', default='')
     kind = models.ForeignKey('Kind', on_delete=models.SET_NULL, null=True)
     current_date = models.DateField(default=datetime.date.today)
     stars_choice = ((1,1), (2,2), (3,3), (4,4), (5,5))
     stars = models.IntegerField(choices=stars_choice, default=3)
+    ph = models.ForeignKey(ImageList, on_delete=models.SET_NULL, null=True, max_length=200)
 
     def __str__(self):
         return self.title
