@@ -13,7 +13,7 @@ class viewIndex(TemplateView):
 
     def get(self, request):
         last3recepts = Recept.objects.all()[:3]
-        last3Articles = Article.objects.all()[:2],
+        last3Articles = Article.objects.all()[:2]
         ctx = {
             'last3_recept': last3recepts,
             'last3_articles': last3Articles

@@ -43,8 +43,7 @@
             </div>
             <div class="row">
                 <!-- Top Catagory Area -->
-                {% for item in last3_articles %}
-
+                {% for value in last3_articles %}
                 <div class="col-12 col-lg-6">
                     <div class="single-top-catagory">
                         <img src="{% static 'img/bg-img/bg2.jpg' %}" alt="">
@@ -52,9 +51,9 @@
 
                         <!-- Content -->
                         <div class="top-cta-content">
-                            <h3>{{item.title}}</h3>
-                            <h6>Вкусно и просто!</h6>
-                            <a href="receipe-post.html" class="btn delicious-btn">Читать полностью</a>
+                            <h3>{{value.title}}</h3>
+                            <h6>{% trans 'Вкусно и просто!' %}</h6>
+                            <a href="{{value.get_absolute_url}}" class="btn delicious-btn">{% trans 'Читать полностью' %}</a>
                         </div>
                     </div>
                 </div>

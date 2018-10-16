@@ -83,7 +83,7 @@ class Article(models.Model):
     current_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return str(self.title)
+        return self.title
 
     def get_absolute_url(self):
         return reverse('article-detail', args=[str(self.id)])
