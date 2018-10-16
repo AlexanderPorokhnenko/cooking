@@ -149,7 +149,7 @@ class AboutView(TemplateView):
 
 class ReceptArticleFeed(Feed):
     title = "Perfect cooking - Отборные рецепты для вас"
-    description = "Последние статьи и рецепты с сайта Perfect Cooking"
+    description = "Последние рецепты с сайта Perfect Cooking"
     link = 'feed/'
 
     def items(self):
