@@ -3,7 +3,6 @@ from django.urls import path
 from . import views
 from .views import viewIndex, viewReceptSearch, ReceiptsListView, Search, Articles, ArticlesDetail, AboutView
 
-
 urlpatterns = [
     path('', viewIndex.as_view() , name='index'),
     path('index/', viewIndex.as_view() , name='index'),
