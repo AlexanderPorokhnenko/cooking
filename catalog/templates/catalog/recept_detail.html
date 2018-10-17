@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
      {% load static %}
+    {% load i18n %}
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>Delicious - Food Blog Template | About</title>
+    <title>{{recept.title}} {% trans 'рецепт с фото и описанием, готовим быстро и вкусно | Perfect Cooking' %}</title>
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
     <!-- Core Stylesheet -->
@@ -20,9 +21,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="receipe-slider owl-carousel">
-                        <img src="{% static 'img/bg-img/bg5.jpg' %}" alt="">
-                        <img src="{% static 'img/bg-img/bg5.jpg' %}" alt="">
-                        <img src="{% static 'img/bg-img/bg5.jpg' %}" alt="">
+                        {% for item in recept.ph %}
+                        <img src="{{item.url }}" alt="{{item}}">
+                        {%endfor%}
                     </div>
                 </div>
             </div>
@@ -37,9 +38,10 @@
                             <span>{{recept.current_date|date:"d E Y"}}</span>
                             <h2>{{recept.title}}</h2>
                             <div class="receipe-duration">
-                                <h6>Prep: 15 mins</h6>
-                                <h6>Cook: 30 mins</h6>
-                                <h6>Yields: 8 Servings</h6>
+                                <h6>{% trans 'Подготовка продуктов'%}: {{recept.slpit_cook_time.0}} {% trans 'минут'%}</h6>
+
+                                <h6>{% trans 'Приготовление блюда:'%} {{recept.slpit_cook_time.1}} {% trans 'минут' %}</h6>
+                                <h6>{% trans 'Выход'%}: {{recept.slpit_cook_time.2}} {% trans 'порций' %}</h6>
                             </div>
                         </div>
                     </div>
@@ -56,7 +58,7 @@
                                 {% endfor %}
                             </div>
 
-                            <a href="#" class="btn delicious-btn">{% if recept.stars <= 3 %} Для начинающих{% else %}Непростой рецепт{% endif %}</a>
+                            <a href="#" class="btn delicious-btn">{% if recept.stars <= 3 %} {% trans 'Для начинающих'%}{% else %}{% trans 'Непростой рецепт'%}{% endif %}</a>
                         </div>
                     </div>
                 </div>
@@ -79,14 +81,14 @@
                     <!-- Ingredients -->
                     <div class="col-12 col-lg-4">
                         <div class="ingredients">
-                            <h4>Ингридиенты</h4>
+                            <h4>{% trans 'Ингридиенты' %}</h4>
 
                             <!-- Custom Checkbox -->
                             {% for step in recept.slpit_ingridients %}
                             {% if step %}
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="customCheck{{forloop.counter}}">
-                                <label class="custom-control-label" for="customCheck{{forloop.counter}}">{{step}}</label>
+                                <label class="custom-control-label" for="customCheck{{forloop.counter}}">{{step|title}}</label>
                             </div>
                             {% endif %}
                             {% endfor %}
@@ -97,39 +99,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-heading text-left">
-                            <h3>Оставьте комментарий</h3>
+                            <h3>{% trans 'Оставьте комментарий' %}</h3>
                         </div>
                     </div>
                 </div>
-                {% for item in recept.ph %}
-                {{item}}
-                {%endfor%}
                 <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
-                <!--<div class="row">-->
-                    <!--<div class="col-12">-->
-                        <!--<div class="contact-form-area">-->
-                            <!--<form action="#" method="post">-->
-                                <!--<div class="row">-->
-                                    <!--<div class="col-12 col-lg-6">-->
-                                        <!--<input type="text" class="form-control" id="name" placeholder="Имя">-->
-                                    <!--</div>-->
-                                    <!--<div class="col-12 col-lg-6">-->
-                                        <!--<input type="email" class="form-control" id="email" placeholder="E-mail">-->
-                                    <!--</div>-->
-                                    <!--<div class="col-12">-->
-                                        <!--<input type="text" class="form-control" id="subject" placeholder="Тема">-->
-                                    <!--</div>-->
-                                    <!--<div class="col-12">-->
-                                        <!--<textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Сообщение"></textarea>-->
-                                    <!--</div>-->
-                                    <!--<div class="col-12">-->
-                                        <!--<button class="btn delicious-btn mt-30" type="submit">Отправить</button>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</form>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
             </div>
         </div>
     </div>

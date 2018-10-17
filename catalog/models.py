@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 import uuid, datetime
+from django.conf import settings
 
 class Kitchen(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
@@ -37,21 +38,20 @@ class Kind(models.Model):
     def __str__(self):
         return self.kind
 
-
-
 def upload_path_handler(instance, filename):
-    return "/home/alex/Projects/cooking/cooking_site/static/img/blog-img/{title}/{file}".format(title=instance.title, file=filename)
+    return settings.MEDIA_URL + "{title}/{file}".format(title=instance.title, file=filename)
+
 
 class ImageList(models.Model):
     title = models.CharField(max_length=200, help_text='Enter the title of the article', null=True)
     title_image1 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
     title_image2 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
-    title_image3 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
+    title_image3 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735', blank=True)
     preview_image = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Preview image 110x110')
-    slider_image = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Slider image 1920x1280')
+    slider_image = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Slider image 1920x1280', blank=True)
 
     def __iter__(self):
-        return iter([self.image1, self.image2])
+        return iter([self.title_image1, self.title_image2])
 
     def __str__(self):
         return str(self.title)
@@ -68,6 +68,8 @@ class Recept(models.Model):
     stars_choice = ((1,1), (2,2), (3,3), (4,4), (5,5))
     stars = models.IntegerField(choices=stars_choice, default=3)
     ph = models.ForeignKey(ImageList, on_delete=models.SET_NULL, null=True, max_length=200)
+    slider = models.BooleanField(help_text='Is field for slider?', default=False)
+    cook_time = models.CharField(max_length=20, help_text='Enter 3 digits separated by "$". Prepare time, cooking time, yields', default='')
 
     def __str__(self):
         return self.title
@@ -77,6 +79,9 @@ class Recept(models.Model):
 
     def slpit_ingridients(self):
         return str(self.ingridients).split(';')
+
+    def slpit_cook_time(self):
+        return str(self.cook_time).split(';')
 
     def get_absolute_url(self):
         return reverse('receipt-detail', args=[str(self.id)])
@@ -93,12 +98,13 @@ class Message(models.Model):
     current_date = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return str(self.subject) +" " + str(self.email) + " " + str(self.current_date)
+        return str(self.subject) + " " + str(self.email) + " " + str(self.current_date)
+
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
-    pictures = models.ImageField(null=False, upload_to='static/img/articles')
+    pictures = models.ImageField(null=False, upload_to='static/img/articles', help_text='Image for article 900x300')
     text = models.TextField(help_text='Enter text of article')
     current_date = models.DateField(default=datetime.date.today)
 

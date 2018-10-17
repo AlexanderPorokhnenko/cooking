@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.syndication.views import Feed
+from django.utils.encoding import iri_to_uri
 
 class viewIndex(TemplateView):
     template_name = 'index.html'
@@ -16,13 +17,15 @@ class viewIndex(TemplateView):
         last3Articles = Article.objects.all()[:2]
         ctx = {
             'last3_recept': last3recepts,
-            'last3_articles': last3Articles
+            'last3_articles': last3Articles,
+            'last6_recept':Recept.objects.all().order_by('-current_date')[:6]
         }
 
         return render(request, self.template_name, ctx)
 
 class ReceiptsListView(ListView):
     model = Recept
+    paginate_by = 6
 
     def get_queryset(self):
         return Recept.objects.all()
@@ -49,7 +52,6 @@ class viewReceptSearch(TemplateView):
     template_name = 'receipe-post.html'
 
     def get(self, request, *args, **kwargs):
-        ctx = {Recept.objects.all()}
         return render(request, self.template_name)
 
 
@@ -123,6 +125,7 @@ class Search(ListView):
 
 class Articles(ListView):
     model = Article
+    paginate_by = 2
 
 class ArticlesDetail(DetailView):
     model = Article
@@ -153,7 +156,7 @@ class ReceptArticleFeed(Feed):
     link = 'feed/'
 
     def items(self):
-        return Recept.objects.all()
+        return Recept.objects.all().order_by('-current_date')
 
     def item_description(self, item):
         return item.text[:400]

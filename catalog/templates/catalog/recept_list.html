@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     {% load static %}
+    {%load i18n %}
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,11 +33,10 @@
         </div>
     </div>
     <!-- ##### Breadcumb Area End ##### -->
- <div class="receipe-post-area section-padding-80">
+ <div class="receipe-post-area section-padding-80-0">
         {% for message in messages %}
             {{ message }}
      {% endfor%}
-         <h5>Выберите тип блюда</h5>
         <!-- Receipe Post Search -->
         <div class="receipe-post-search mb-80">
             <div class="container">
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-3">
                             <select name="select1" id="select1">
-                                <option value="">Любой тип</option>
+                                <option value="">{% trans 'Выберите тип блюда' %}</option>
                                 {%for item in kind_query_set %}
                                 <option value="{{item}}">{{item.get_kind_display}}</option>
                                 {% endfor %}
@@ -54,7 +54,7 @@
 
                         <div class="col-12 col-lg-3">
                             <select name="select1" id="select2">
-                                <option value="">Любая кухня</option>
+                                <option value="">{% trans 'Выберите кухню' %}</option>
                                 {%for item in kitchen_query_set %}
                                 <option value="{{item}}" > {{item.get_kitchen_display}}</option>
                                 {% endfor %}
@@ -70,17 +70,36 @@
                 </form>
             </div>
         </div>
+     </div>
 <div class="section-heading">
     {% if 'receiptSearch' in request.path and recept_list %}
      <h2>Вот, что удалось найти:</h2>
      {% elif not recept_list%}
      <h2>К сожалению, ничего не найдено...</h2>
      {% else %}
-     <h2>Новые рецепты:</h2>
+     <h1>Новые рецепты:</h1>
     {% endif %}
  </div>
+
 {% include '_small_recept_area.html' %}
-</body>
+               <ul class="pagination justify-content-center mb-4">
+            {% if is_paginated %}
+                <li class="page-item">
+                {% if page_obj.has_previous %}
+                    <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">{% trans 'Вперед' %}&rarr;</a>
+            {% endif %}
+                </li>
+                <!--<span class="page-current">-->
+                  <!--Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
+              <!--</span>-->
+                <li class="page-item">
+              {% if page_obj.has_next %}
+                  <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}">&larr; {% trans 'Назад' %}</a>
+              {% endif %}
+              {% endif %}
+                </li>
+            </ul>
 {% include '_footer.html' %}
+</body>
 
 </html>
