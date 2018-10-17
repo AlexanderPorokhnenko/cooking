@@ -90,6 +90,7 @@ class Recept(models.Model):
     def get_absolute_url(self):
         return reverse('receipt-detail', args=[str(self.id)])
 
+
 class Subscriptions(models.Model):
     email = models.EmailField(max_length=55)
 
