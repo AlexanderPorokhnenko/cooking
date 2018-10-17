@@ -114,7 +114,8 @@ class Article(models.Model):
     tags = models.CharField(max_length=300, default='', help_text='Tags separated by comma')
 
     def split_tags(self):
-        return str(self.tags).split(',')
+        return [x.strip() for x in str(self.tags).split(',') if x]
+        # return str(self.tags).split(',')
 
     def __str__(self):
         return self.title
