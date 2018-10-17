@@ -28,7 +28,7 @@ class ReceiptsListView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        return Recept.objects.all()
+        return Recept.objects.all().order_by('-current_date')
 
     def get_context_data(self, **kwargs):
         context = super(ReceiptsListView, self).get_context_data(**kwargs)
@@ -74,7 +74,7 @@ class Search(ListView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('search')
         if query:
-            search_query_set = Recept.objects.filter(title__icontains=query)
+            search_query_set = Recept.objects.filter(title__icontains=query) | Recept.objects.filter(tags__icontains=query) | Recept.objects.filter(text__icontains=query)
             if search_query_set:
                 ctx = {'recept_list': search_query_set}
                 return render(request, self.template_name, context=ctx)
@@ -83,9 +83,8 @@ class Search(ListView):
 
     def post(self, request, *args, **kwargs):
         query = request.POST.get('search')
-        print(request.POST)
         if query:
-            search_query_set = Recept.objects.filter(title__icontains=query)
+            search_query_set = Recept.objects.filter(title__icontains=query) | Recept.objects.filter(tags__icontains=query) | Recept.objects.filter(text__icontains=query)
             if search_query_set:
                 ctx = {'recept_list': search_query_set,
                        'kind_query_set': Kind.objects.all(),
@@ -126,6 +125,9 @@ class Search(ListView):
 class Articles(ListView):
     model = Article
     paginate_by = 2
+
+    def get_queryset(self):
+        return Article.objects.all().order_by('-current_date')
 
 class ArticlesDetail(DetailView):
     model = Article

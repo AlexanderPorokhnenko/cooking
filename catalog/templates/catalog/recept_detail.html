@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     {% load static %}
+    {% load static %}
     {% load i18n %}
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -95,8 +95,14 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
+                <div class="tag">
+                    <div class="col-12">
+                        {% for tag in recept.split_tags%}
+                      <a href="/receiptSearch/?search={{tag}}"><i class="fa fa-tag" aria-hidden="true"></i>{{tag}}</a>
+                        {% endfor%}
+                    </div>
+                </div>
+                <div class="row" style="margin-top:40px;">
                     <div class="col-12">
                         <div class="section-heading text-left">
                             <h3>{% trans 'Оставьте комментарий' %}</h3>

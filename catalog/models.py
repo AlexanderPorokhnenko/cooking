@@ -60,7 +60,7 @@ class ImageList(models.Model):
 class Recept(models.Model):
     title = models.CharField(max_length=200, help_text='Enter the title of the article')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID of recept', editable=False, unique=True)
-    text = models.TextField(help_text='Enter text of article')
+    text = models.TextField(help_text='Enter text of recept', default='')
     kitchen = models.ManyToManyField(Kitchen, help_text='Select a kitchen for this recept')
     ingridients = models.TextField(help_text='List and quantity of ingridients', default='')
     kind = models.ForeignKey('Kind', on_delete=models.SET_NULL, null=True)
@@ -68,11 +68,15 @@ class Recept(models.Model):
     stars_choice = ((1,1), (2,2), (3,3), (4,4), (5,5))
     stars = models.IntegerField(choices=stars_choice, default=3)
     ph = models.ForeignKey(ImageList, on_delete=models.SET_NULL, null=True, max_length=200)
+    tags = models.CharField(default='', max_length=300, help_text='Tags separated bt comma')
     slider = models.BooleanField(help_text='Is field for slider?', default=False)
     cook_time = models.CharField(max_length=20, help_text='Enter 3 digits separated by "$". Prepare time, cooking time, yields', default='')
 
     def __str__(self):
         return self.title
+
+    def split_tags(self):
+        return str(self.tags).split(',')
 
     def slpit_text(self):
         return str(self.text).split(';')
@@ -107,6 +111,10 @@ class Article(models.Model):
     pictures = models.ImageField(null=False, upload_to='static/img/articles', help_text='Image for article 900x300')
     text = models.TextField(help_text='Enter text of article')
     current_date = models.DateField(default=datetime.date.today)
+    tags = models.CharField(max_length=300, default='', help_text='Tags separated by comma')
+
+    def split_tags(self):
+        return str(self.tags).split(',')
 
     def __str__(self):
         return self.title

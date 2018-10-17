@@ -69,6 +69,10 @@
             <ul class="pagination justify-content-center mb-4">
             {% if is_paginated %}
                 <li class="page-item">
+              {% if page_obj.has_next %}
+                  <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}">&larr; {% trans 'Назад' %}</a>
+              {% endif %}
+                <li class="page-item">
                 {% if page_obj.has_previous %}
                     <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">{% trans 'Вперед' %}&rarr;</a>
             {% endif %}
@@ -76,10 +80,7 @@
                 <!--<span class="page-current">-->
                   <!--Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
               <!--</span>-->
-                <li class="page-item">
-              {% if page_obj.has_next %}
-                  <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}">&larr; {% trans 'Назад' %}</a>
-              {% endif %}
+
               {% endif %}
                 </li>
             </ul>
