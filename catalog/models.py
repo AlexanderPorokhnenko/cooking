@@ -22,7 +22,9 @@ class Kitchen(models.Model):
     def __str__(self):
         return self.kitchen
 
+
 class Kind(models.Model):
+
     id = models.AutoField(unique=True, primary_key=True)
     kind_vars = (
         ('first', 'Первые блюда'),
@@ -38,11 +40,13 @@ class Kind(models.Model):
     def __str__(self):
         return self.kind
 
+
 def upload_path_handler(instance, filename):
     return settings.MEDIA_URL + "{title}/{file}".format(title=instance.title, file=filename)
 
 
 class ImageList(models.Model):
+
     title = models.CharField(max_length=200, help_text='Enter the title of the article', null=True)
     title_image1 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
     title_image2 = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Title image 1920x735')
@@ -51,13 +55,14 @@ class ImageList(models.Model):
     slider_image = models.ImageField(null=True, upload_to=upload_path_handler, help_text='Slider image 1920x1280', blank=True)
 
     def __iter__(self):
-        return iter([self.title_image1, self.title_image2])
+        return iter([self.title_image1, self.title_image2, self.title_image3, self.preview_image, self.slider_image])
 
     def __str__(self):
         return str(self.title)
 
 
 class Recept(models.Model):
+
     title = models.CharField(max_length=200, help_text='Enter the title of the article')
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID of recept', editable=False, unique=True)
     text = models.TextField(help_text='Enter text of recept', default='')
@@ -73,29 +78,31 @@ class Recept(models.Model):
     cook_time = models.CharField(max_length=20, help_text='Enter 3 digits separated by "$". Prepare time, cooking time, yields', default='')
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     def split_tags(self):
-        return str(self.tags).split(',')
+        return [x.strip() for x in str(self.tags).split(',') if x]
 
-    def slpit_text(self):
-        return str(self.text).split(';')
+    def split_text(self):
+        return [x.strip() for x in str(self.text).split(';') if x]
 
     def slpit_ingridients(self):
-        return str(self.ingridients).split(';')
+        return [x.strip() for x in str(self.ingridients).split(';') if x]
 
     def slpit_cook_time(self):
-        return str(self.cook_time).split(';')
+        return [x.strip() for x in str(self.cook_time).split(';') if x]
 
     def get_absolute_url(self):
         return reverse('receipt-detail', args=[str(self.id)])
 
 
 class Subscriptions(models.Model):
+
     email = models.EmailField(max_length=55)
 
 
 class Message(models.Model):
+
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=55)
     subject = models.CharField(max_length=50)
@@ -107,6 +114,7 @@ class Message(models.Model):
 
 
 class Article(models.Model):
+
     title = models.CharField(max_length=200)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
     pictures = models.ImageField(null=False, upload_to='static/img/articles', help_text='Image for article 900x300')
@@ -116,7 +124,6 @@ class Article(models.Model):
 
     def split_tags(self):
         return [x.strip() for x in str(self.tags).split(',') if x]
-        # return str(self.tags).split(',')
 
     def __str__(self):
         return self.title

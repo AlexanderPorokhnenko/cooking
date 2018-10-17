@@ -5,7 +5,6 @@ from django.urls import reverse
 
 class ArticleListViewTest(TestCase):
 
-
     @classmethod
     def setUpTestData(cls):
         number_of_articles = 100
@@ -33,15 +32,20 @@ class ArticleListViewTest(TestCase):
         self.assertEqual(len(resp.context['article_list']), 2)
 
     def test_lists_all_articles(self):
-        resp = self.client.get(reverse('articles')+'?page=2')
+        resp = self.client.get(reverse('articles') + '?page=2')
         self.assertEqual(resp.status_code, 200)
         self.assertTrue('is_paginated' in resp.context)
         self.assertTrue(resp.context['is_paginated'] is True)
         self.assertTrue( len(resp.context['article_list']) == 2)
 
+    def test_HTTP404_for_article(self):
+        import uuid
+        test_uid = uuid.uuid4()
+        resp = self.client.get(reverse('article-detail', kwargs={'pk': test_uid,}) )
+        self.assertEqual(resp.status_code, 404)
+
 
 class ReceiptListViewTest(TestCase):
-
 
     @classmethod
     def setUpTestData(cls):
@@ -75,3 +79,9 @@ class ReceiptListViewTest(TestCase):
         self.assertTrue('is_paginated' in resp.context)
         self.assertTrue(resp.context['is_paginated'] == True)
         self.assertTrue( len(resp.context['recept_list']) == 6)
+
+    def test_HTTP404_for_article(self):
+        import uuid
+        test_uid = uuid.uuid4()
+        resp = self.client.get(reverse('receipt-detail', kwargs={'pk': test_uid, }))
+        self.assertEqual(resp.status_code, 404)        
