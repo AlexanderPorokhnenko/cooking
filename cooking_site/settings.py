@@ -29,7 +29,7 @@ with open('db.txt') as f:
     db_p = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True))
+DEBUG = True #bool( os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['secure-atoll-87268.herokuapp.com', '127.0.0.1', 'localhost']
 CSRF_COOKIE_SECURE = True
