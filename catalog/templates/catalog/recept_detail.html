@@ -22,7 +22,9 @@
                 <div class="col-12">
                     <div class="receipe-slider owl-carousel">
                         {% for item in recept.ph %}
+                        {% if item %}
                         <img src="{{item.url }}" alt="{{item}}">
+                        {% endif %}
                         {%endfor%}
                     </div>
                 </div>
