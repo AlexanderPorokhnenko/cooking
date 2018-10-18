@@ -1378,4 +1378,16 @@ textarea:focus {
     margin-bottom: 0;
     padding-left: 30px; }
 
+
+.recipe-ps {
+    padding: 25px 20px;
+    text-align: left;
+
+}
+.recipe-ps i {
+			margin: 0 auto 10px;
+			display: block;
+			float: none;
+			line-height: 1;
+		}
 /*# sourceMappingURL=style.css.map */

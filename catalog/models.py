@@ -3,6 +3,7 @@ from django.urls import reverse
 import uuid, datetime
 from django.conf import settings
 
+
 class Kitchen(models.Model):
     id = models.AutoField(unique=True, primary_key=True)
     kitchen_vars = (

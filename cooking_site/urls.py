@@ -24,9 +24,6 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     # path('catalog/', include('catalog.urls')),
     path(r'', include('catalog.urls')),
-    #
-    # path(r'index/', include('catalog.urls')),
-
 )
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

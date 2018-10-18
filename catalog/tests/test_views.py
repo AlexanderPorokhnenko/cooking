@@ -80,8 +80,12 @@ class ReceiptListViewTest(TestCase):
         self.assertTrue(resp.context['is_paginated'] == True)
         self.assertTrue( len(resp.context['recept_list']) == 6)
 
-    def test_HTTP404_for_article(self):
+    def test_HTTP404_for_receipt(self):
         import uuid
         test_uid = uuid.uuid4()
         resp = self.client.get(reverse('receipt-detail', kwargs={'pk': test_uid, }))
-        self.assertEqual(resp.status_code, 404)        
+        self.assertEqual(resp.status_code, 404)
+
+    def test_rss_recept(self):
+        resp = self.client.get(reverse('feed'))
+        self.assertEqual(resp.status_code, 200)
