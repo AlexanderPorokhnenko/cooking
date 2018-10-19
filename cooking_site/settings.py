@@ -32,6 +32,12 @@ with open('db.txt') as f:
 DEBUG = True #bool( os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['secure-atoll-87268.herokuapp.com', '127.0.0.1', 'localhost']
+# CSRF_COOKIE_SECURE = False
+# SESSION_COOKIE_SECURE = False
+# SECURE_CONTENT_TYPE_NOSNIFF = False
+# SECURE_BROWSER_XSS_FILTER = False
+# SECURE_SSL_REDIRECT = False
+# X_FRAME_OPTIONS = 'DENY'
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -74,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -141,6 +148,7 @@ LOCALE_PATHS = (
 )
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
 WSGI_APPLICATION = 'cooking_site.wsgi.application'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
