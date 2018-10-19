@@ -31,7 +31,7 @@ with open('db.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True #bool( os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['secure-atoll-87268.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['perfectcooking.herokuapp.com', '127.0.0.1', 'localhost']
 # CSRF_COOKIE_SECURE = False
 # SESSION_COOKIE_SECURE = False
 # SECURE_CONTENT_TYPE_NOSNIFF = False
