@@ -43,7 +43,6 @@ class Kind(models.Model):
 
 
 def upload_path_handler(instance, filename):
-    print(settings.MEDIA_URL + "{title}/{file}".format(title=instance.title, file=filename))
     return settings.MEDIA_URL[1:] + "{title}/{file}".format(title=instance.title, file=filename)
 
 
