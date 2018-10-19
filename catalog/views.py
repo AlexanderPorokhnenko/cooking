@@ -165,3 +165,6 @@ class ReceptArticleFeed(Feed):
 
     def item_title(self, item):
         return item.title
+
+def ViewGoogle(request):
+    return render(request, 'googlea3e0954946e46570.html')

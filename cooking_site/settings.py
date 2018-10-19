@@ -32,12 +32,14 @@ with open('db.txt') as f:
 DEBUG = True #bool( os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['perfectcooking.herokuapp.com', '127.0.0.1', 'localhost']
+
 # CSRF_COOKIE_SECURE = False
 # SESSION_COOKIE_SECURE = False
 # SECURE_CONTENT_TYPE_NOSNIFF = False
 # SECURE_BROWSER_XSS_FILTER = False
 # SECURE_SSL_REDIRECT = False
 # X_FRAME_OPTIONS = 'DENY'
+
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
